@@ -10,6 +10,7 @@ export default function Card({ flashCard, revealQuestion, questionCards, code, r
 
     const iconArray = [icon_wrong, icon_partial, icon_correct];
     const colorArray = ["#FF3030", "#FF922E", "#2FBE34"];
+    const dataTestArray = ["no-icon", "partial-icon", "zap-icon"]
 
     return (
         <>
@@ -25,7 +26,8 @@ export default function Card({ flashCard, revealQuestion, questionCards, code, r
                         onClick={() => revealQuestion(flashCard, code)}
                         data-test="play-btn" />
                     <img src={iconArray[buttonNumber[code]]}
-                        alt="icon" />
+                        alt="icon"
+                        data-test={dataTestArray[buttonNumber[code]]} />
                 </div>
             </CardClosed>
             <CardOpened reveal={questionCards.includes(code)} turn={answerCards.includes(code)} data-test="flashcard">
