@@ -105,6 +105,7 @@ export default function AppBody() {
         const secondArray = [...buttonNumber]
         secondArray[code] = number;
         setButtonNumber(secondArray);
+        console.log(newArray);
 
     }
 
@@ -122,7 +123,8 @@ export default function AppBody() {
                 answerNo={answerNo}
                 answerPartial={answerPartial}
                 answerYes={answerYes} />
-            <Bottom />
+            <Bottom flashCards={flashCards}
+                iconCards={iconCards} />
         </AppBackground>
     );
 }

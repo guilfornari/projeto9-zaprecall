@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export default function Bottom() {
+export default function Bottom({ flashCards, iconCards }) {
     return (
         <BottomContainer data-test="footer">
-            <p>0/4 CONCLUÍDOS</p>
+            <p><span>{iconCards.length}</span>/<span>{flashCards.length}</span> CONCLUÍDOS</p>
         </BottomContainer>
     );
 }
