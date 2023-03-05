@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export default function Bottom() {
     return (
-        <BottomContainer>
+        <BottomContainer data-test="footer">
             <p>0/4 CONCLUÍDOS</p>
         </BottomContainer>
     );

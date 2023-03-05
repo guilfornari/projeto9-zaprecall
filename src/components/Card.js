@@ -5,30 +5,31 @@ import turn_arrow from "../assets/seta_virar.png";
 export default function Card({ flashCard, revealQuestion, questionCards, code, revealAnswer, answerCards }) {
     return (
         <>
-            <CardClosed reveal={questionCards.includes(code)}>
-                <p>{flashCard}</p>
+            <CardClosed reveal={questionCards.includes(code)} data-test="flashcard">
+                <p data-test="flashcard-text">{flashCard}</p>
                 <div>
-                    <img src={play_arrow} alt="play arrow" onClick={() => revealQuestion(flashCard, code)} />
+                    <img src={play_arrow}
+                        alt="play arrow"
+                        onClick={() => revealQuestion(flashCard, code)}
+                        data-test="play-btn" />
                 </div>
             </CardClosed>
-            <CardOpened reveal={questionCards.includes(code)}>
-                <div>
-                    <p>{flashCard}</p>
-                </div>
+            <CardOpened reveal={questionCards.includes(code)} turn={answerCards.includes(code)} data-test="flashcard">
+                <p data-test="flashcard-text">{flashCard}</p>
                 <div>
                     <figure>
-                        <img src={turn_arrow} alt="turn arrow" onClick={() => revealAnswer(flashCard, code)} />
+                        <img src={turn_arrow}
+                            alt="turn arrow"
+                            onClick={() => revealAnswer(flashCard, code)}
+                            data-test="turn-btn" />
                     </figure>
                 </div>
-            </CardOpened>
-            <CardTurned reveal={answerCards.includes(code)}>
-                <p>{flashCard}</p>
                 <div>
-                    <button>Não lembrei</button>
-                    <button>Quase não lembrei</button>
-                    <button>Zap!</button>
+                    <button data-test="no-btn">Não lembrei</button>
+                    <button data-test="partial-btn">Quase não lembrei</button>
+                    <button data-test="zap-btn">Zap!</button>
                 </div>
-            </CardTurned>
+            </CardOpened>
         </>
     );
 }
@@ -72,6 +73,7 @@ background-color: #FFFFD4;
 margin-bottom: 25px;
 padding: 15px;
 display: ${(props) => props.reveal ? "flex" : "none"};
+flex-direction: column;
 justify-content: space-between;
 border-radius: 5px;
 box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
@@ -85,8 +87,8 @@ p {
 }
 
 div:nth-child(2){
-    display: flex;
-    align-items: flex-end;
+    display: ${(props) => props.turn ? "none" : "flex"};
+    justify-content: flex-end;
 }
 
 figure{
@@ -98,33 +100,9 @@ img {
     width: 100%;
     cursor: pointer;
 }
-`
-
-const CardTurned = styled.div`
-width: 300px;
-height: 131px;
-min-height: 131px;
-background-color: #FFFFD4;
-margin-bottom: 25px;
-padding: 15px;
-display: ${(props) => props.reveal ? "flex" : "none"};
-flex-direction: column;
-justify-content: space-between;
-border-radius: 5px;
-box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
-
-div{
-    display: flex;
+div:nth-child(3){
+    display: ${(props) => props.turn ? "flex" : "none"};
     justify-content: space-between;
-}
-
-p{
-    font-family: "Recursive", sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    color: #333333;
-
 }
 
 button{
