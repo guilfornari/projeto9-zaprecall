@@ -7,25 +7,58 @@ import { useState } from "react";
 
 export default function AppBody() {
 
-    const [flashCards, setFlashCards] = useState(["Pergunta 1",
-        "Pergunta 2", "Pergunta 3", "Pergunta 4", "Pergunta 5", "Pergunta 6", "Pergunta 7", "Pergunta 8"]);
+    const [flashCards, setFlashCards] = useState(["Pergunta 1", "Pergunta 2",
+        "Pergunta 3", "Pergunta 4", "Pergunta 5", "Pergunta 6", "Pergunta 7", "Pergunta 8"]);
 
-    function revealQuestion(flashCard) {
+    const [questionCards, setquestionCards] = useState([]);
+
+    const [answerCards, setAnsweCards] = useState([]);
+
+    function revealQuestion(flashCard, code) {
         const questionsArray = cards.map(q => q.question)
-
-        for (let i = 0; i < flashCards.length; i++) {
-            if (flashCard === flashCards[i]) {
-                flashCards[i] = questionsArray[i];
+        const newArray = [...flashCards];
+        for (let i = 0; i < newArray.length; i++) {
+            if (flashCard === newArray[i]) {
+                newArray[i] = questionsArray[i];
             }
         }
-
-        setFlashCards([...flashCards]);
+        setFlashCards(newArray);
+        openCards(code);
     }
+
+    function openCards(code) {
+        const newArray = [...questionCards, code]
+        setquestionCards(newArray);
+    }
+
+    function revealAnswer(flashCard, code) {
+        const answersArray = cards.map(a => a.answer)
+        const newArray = [...flashCards]
+        for (let i = 0; i < newArray.length; i++) {
+            if (flashCard === newArray[i]) {
+                newArray[i] = answersArray[i];
+            }
+        }
+        setFlashCards(newArray);
+        turnCards(code);
+    }
+
+    function turnCards(code) {
+        const newArray = [...answerCards, code]
+        setAnsweCards(newArray);
+    }
+
+
 
     return (
         <AppBackground>
             <Header />
-            <Deck cards={cards} flashCards={flashCards} revealQuestion={revealQuestion} />
+            <Deck cards={cards}
+                flashCards={flashCards}
+                questionCards={questionCards}
+                answerCards={answerCards}
+                revealQuestion={revealQuestion}
+                revealAnswer={revealAnswer} />
             <Bottom />
         </AppBackground>
     );

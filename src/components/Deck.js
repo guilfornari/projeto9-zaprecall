@@ -1,13 +1,18 @@
 import styled from "styled-components";
 import Card from "./Card";
 
-export default function Deck({ flashCards, revealQuestion }) {
+export default function Deck({ flashCards, questionCards, revealQuestion, revealAnswer, answerCards }) {
     return (
         <CardContainer>
             {flashCards.map((flashCard, index) => (<Card
+                flashCards={flashCards}
+                questionCards={questionCards}
+                answerCards={answerCards}
                 flashCard={flashCard}
                 key={index}
-                revealQuestion={revealQuestion} />))}
+                revealQuestion={revealQuestion}
+                revealAnswer={revealAnswer}
+                code={index} />))}
         </CardContainer>
     );
 }
