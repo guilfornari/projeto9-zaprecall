@@ -1,17 +1,31 @@
 import styled from "styled-components";
 import play_arrow from "../assets/seta_play.png";
 import turn_arrow from "../assets/seta_virar.png";
+import icon_correct from "../assets/icone_certo.png"
+import icon_wrong from "../assets/icone_erro.png"
+import icon_partial from "../assets/icone_quase.png"
 
-export default function Card({ flashCard, revealQuestion, questionCards, code, revealAnswer, answerCards }) {
+export default function Card({ flashCard, revealQuestion, questionCards, code, revealAnswer,
+    answerCards, answerNo, buttonNumber, iconCards, answerPartial, answerYes }) {
+
+    const iconArray = [icon_wrong, icon_partial, icon_correct];
+    const colorArray = ["#FF3030", "#FF922E", "#2FBE34"];
+
     return (
         <>
-            <CardClosed reveal={questionCards.includes(code)} data-test="flashcard">
+            <CardClosed reveal={questionCards.includes(code)}
+                close={iconCards.includes(code)}
+                lineColor={colorArray[buttonNumber[code]]}
+                data-test="flashcard">
+                <p data-test="flashcard-text">{flashCard}</p>
                 <p data-test="flashcard-text">{flashCard}</p>
                 <div>
                     <img src={play_arrow}
                         alt="play arrow"
                         onClick={() => revealQuestion(flashCard, code)}
                         data-test="play-btn" />
+                    <img src={iconArray[buttonNumber[code]]}
+                        alt="icon" />
                 </div>
             </CardClosed>
             <CardOpened reveal={questionCards.includes(code)} turn={answerCards.includes(code)} data-test="flashcard">
@@ -25,9 +39,9 @@ export default function Card({ flashCard, revealQuestion, questionCards, code, r
                     </figure>
                 </div>
                 <div>
-                    <button data-test="no-btn">Não lembrei</button>
-                    <button data-test="partial-btn">Quase não lembrei</button>
-                    <button data-test="zap-btn">Zap!</button>
+                    <button onClick={() => answerNo(flashCard, code, 0)} data-test="no-btn">Não lembrei</button>
+                    <button onClick={() => answerPartial(flashCard, code, 1)} data-test="partial-btn">Quase não lembrei</button>
+                    <button onClick={() => answerYes(flashCard, code, 2)} data-test="zap-btn">Zap!</button>
                 </div>
             </CardOpened>
         </>
@@ -52,6 +66,16 @@ p {
     font-weight: 700;
     font-size: 16px;
     color: #333333;
+    display: ${(props) => props.close ? "none" : "flex"};
+}
+
+p:nth-child(2) {
+    font-family: "Recursive", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: ${(props) => props.lineColor};
+    text-decoration: line-through;
+    display: ${(props) => props.close ? "flex" : "none"};
 }
 
 div {
@@ -60,8 +84,15 @@ div {
 }
 
 img {
+    display: ${(props) => props.close ? "none" : "flex"};
     width:100%;
     cursor: pointer;
+}
+
+img:nth-child(2) {
+    width: 100%;
+    cursor: auto;
+    display: ${(props) => props.close ? "flex" : "none"};
 }
 `
 

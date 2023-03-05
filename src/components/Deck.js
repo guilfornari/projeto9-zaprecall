@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Card from "./Card";
 
-export default function Deck({ flashCards, questionCards, revealQuestion, revealAnswer, answerCards }) {
+export default function Deck({ flashCards, questionCards, revealQuestion,
+    revealAnswer, answerCards, answerNo, buttonNumber, iconCards, answerPartial, answerYes }) {
     return (
         <CardContainer>
             {flashCards.map((flashCard, index) => (<Card
@@ -9,10 +10,15 @@ export default function Deck({ flashCards, questionCards, revealQuestion, reveal
                 questionCards={questionCards}
                 answerCards={answerCards}
                 flashCard={flashCard}
+                buttonNumber={buttonNumber}
+                iconCards={iconCards}
                 key={index}
                 revealQuestion={revealQuestion}
                 revealAnswer={revealAnswer}
-                code={index} />))}
+                code={index}
+                answerNo={answerNo}
+                answerPartial={answerPartial}
+                answerYes={answerYes} />))}
         </CardContainer>
     );
 }
