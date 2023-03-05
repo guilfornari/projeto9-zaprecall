@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import play_arrow from "../assets/seta_play.png";
 import turn_arrow from "../assets/seta_virar.png";
-import icon_correct from "../assets/icone_certo.png"
-import icon_wrong from "../assets/icone_erro.png"
-import icon_partial from "../assets/icone_quase.png"
+import icon_correct from "../assets/icone_certo.png";
+import icon_wrong from "../assets/icone_erro.png";
+import icon_partial from "../assets/icone_quase.png";
 
 export default function Card({ flashCard, revealQuestion, questionCards, code, revealAnswer,
     answerCards, answerNo, buttonNumber, iconCards, answerPartial, answerYes }) {
 
     const iconArray = [icon_wrong, icon_partial, icon_correct];
     const colorArray = ["#FF3030", "#FF922E", "#2FBE34"];
-    const dataTestArray = ["no-icon", "partial-icon", "zap-icon"]
+    const dataTestArray = ["no-icon", "partial-icon", "zap-icon"];
 
     return (
         <>
@@ -96,7 +96,7 @@ img:nth-child(2) {
     cursor: auto;
     display: ${(props) => props.close ? "flex" : "none"};
 }
-`
+`;
 
 const CardOpened = styled.div`
 width: 300px;
@@ -117,6 +117,11 @@ p {
     font-size: 18px;
     line-height: 22px;
     color: #333333;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar{
+        display: none;
+    }
 }
 
 div:nth-child(2){
@@ -159,4 +164,4 @@ button:nth-child(2){
 button:nth-child(3){
     background-color: #2FBE34;
 }
-`
+`;

@@ -34,4 +34,4 @@ overflow-y: scroll;
 &::-webkit-scrollbar{
     display: none;
     }
-`
+`;

@@ -24,7 +24,7 @@ font-size: 36px;
 color: #FFFFFF
 
 }
-`
+`;
 
 const ImgContainer = styled.div`
 width: 52px;
@@ -33,4 +33,4 @@ height: 60px;
 img{
     width:100%;
 }
-`
+`;

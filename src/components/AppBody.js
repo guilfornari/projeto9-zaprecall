@@ -21,7 +21,7 @@ export default function AppBody() {
     const [buttonNumber, setButtonNumber] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
 
     function revealQuestion(flashCard, code) {
-        const questionsArray = cards.map(q => q.question)
+        const questionsArray = cards.map(q => q.question);
         const newArray = [...flashCards];
         for (let i = 0; i < newArray.length; i++) {
             if (flashCard === newArray[i]) {
@@ -33,13 +33,13 @@ export default function AppBody() {
     }
 
     function openCards(code) {
-        const newArray = [...questionCards, code]
+        const newArray = [...questionCards, code];
         setquestionCards(newArray);
     }
 
     function revealAnswer(flashCard, code) {
-        const answersArray = cards.map(a => a.answer)
-        const newArray = [...flashCards]
+        const answersArray = cards.map(a => a.answer);
+        const newArray = [...flashCards];
         for (let i = 0; i < newArray.length; i++) {
             if (flashCard === newArray[i]) {
                 newArray[i] = answersArray[i];
@@ -50,44 +50,26 @@ export default function AppBody() {
     }
 
     function turnCards(code) {
-        const newArray = [...answerCards, code]
+        const newArray = [...answerCards, code];
         setAnsweCards(newArray);
     }
 
     function answerNo(flashCard, code, number) {
-        const newArray = [...flashCards]
-        for (let i = 0; i < firstArray.length; i++) {
-            if (flashCard === newArray[i]) {
-                newArray[i] = firstArray[i];
-            }
-        }
-        setFlashCards(newArray);
+        answer(flashCard);
         removeCode(code, questionCards);
         removeCode(code, answerCards);
         setIcon(code, number);
     }
 
     function answerPartial(flashCard, code, number) {
-        const newArray = [...flashCards]
-        for (let i = 0; i < firstArray.length; i++) {
-            if (flashCard === newArray[i]) {
-                newArray[i] = firstArray[i];
-            }
-        }
-        setFlashCards(newArray);
+        answer(flashCard);
         removeCode(code, questionCards);
         removeCode(code, answerCards);
         setIcon(code, number);
     }
 
     function answerYes(flashCard, code, number) {
-        const newArray = [...flashCards]
-        for (let i = 0; i < firstArray.length; i++) {
-            if (flashCard === newArray[i]) {
-                newArray[i] = firstArray[i];
-            }
-        }
-        setFlashCards(newArray);
+        answer(flashCard);
         removeCode(code, questionCards);
         removeCode(code, answerCards);
         setIcon(code, number);
@@ -99,10 +81,20 @@ export default function AppBody() {
         setAnsweCards(codeList);
     }
 
+    function answer(flashCard) {
+        const newArray = [...flashCards];
+        for (let i = 0; i < firstArray.length; i++) {
+            if (flashCard === newArray[i]) {
+                newArray[i] = firstArray[i];
+            }
+        }
+        setFlashCards(newArray);
+    }
+
     function setIcon(code, number) {
-        const newArray = [...iconCards, code]
+        const newArray = [...iconCards, code];
         setIconCards(newArray);
-        const secondArray = [...buttonNumber]
+        const secondArray = [...buttonNumber];
         secondArray[code] = number;
         setButtonNumber(secondArray);
         console.log(newArray);
@@ -134,5 +126,5 @@ width: 375px;
 height: 667px;
 margin: auto;
 background-color: #FB6B6B;
-`
+`;
 

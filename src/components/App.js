@@ -15,4 +15,4 @@ export default App;
 
 const Styling = styled.div`
 background-color: #E5E5E5;
-`
+`;

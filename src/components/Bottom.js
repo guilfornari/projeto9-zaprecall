@@ -22,4 +22,4 @@ p{
     font-weight: 400;
     font-size: 18px;
 }
-`
+`;
